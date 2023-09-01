@@ -12,7 +12,7 @@ function Page1() {
     billToEmail:'',
     billFrom:'MUZAMIL STORE',
     billFromEmail:'muzamilohuthu@gmail.com',
-    billFromAdress:'Coimbatore,Tamilnadu,India',
+    billFromAddress:'Coimbatore,Tamilnadu,India',
     notes:'',
     subTotal:'0.00',
     taxRate: 0.00,
@@ -33,15 +33,24 @@ function Page1() {
   }
 )
 
+const onchangename  = (event) => {
+     setState(state=>({
+      ...state,
+      [event.target.name]:event.target.value,
+     }))
+}
+
   return (
     <div>
       <h2>Invoice Generator</h2>
 
       <Form>
+
       <Row>
         <Col md={8} lg={9}>
-        <Card className='p-4 p-xl- my-3 my-xl-4 d-flex flex-row justify-content-between'>
-        <div className='d-flex flex-row mb-3 '>
+          
+        <Card className='p-4 p-xl- my-3 my-xl-4 d-flex  '>
+        <div className='d-flex flex-row mb-3 justify-content-between'>
          <div className='mb-2'>
           <span className='fw-bold'> current Date: </span> 
           <span className='currentDate'> 
@@ -58,7 +67,63 @@ function Page1() {
           </span>
          </div>
         </div>
+       
+       <hr className='my-6' />
+       <Row className='mb-5'>
 
+        <Col>
+        <h3>Customer Details</h3>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        {/* <Form.Label> Name: </Form.Label> */}
+        <Form.Control
+         placeholder='Customer Name' 
+         value={state.billTo}
+         type='text'
+         name='billTo'
+         className='my-2' 
+         onChange={ onchangename }
+         autoComplete={true}
+         required={true}
+          />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        {/* <Form.Label> Email: </Form.Label> */}
+        <Form.Control
+         placeholder='Customer Email' 
+         value={state.billToEmail}
+         type='text'
+         name='billToEmail'
+         className='my-2' 
+         onChange={ onchangename }
+         autoComplete={true}
+         required={false}
+          />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        {/* <Form.Label> Address: </Form.Label> */}
+        <Form.Control
+         placeholder='customer Address' 
+         value={state.billTAddress}
+         type='text'
+         name='billToAddress'
+         className='my-2' 
+         onChange={ onchangename}
+         autoComplete={true}
+         required={false}
+          />
+        </Form.Group>
+        </Col>
+
+        <Col>
+        <h3>Bill From</h3>
+        <Form.Control value={state.billFrom} className='my-2'disabled={true}  /> 
+        <Form.Control value={state.billFromEmail} className='my-2'disabled={true}  /> 
+        <Form.Control value={state.billFromAddress} className='my-2'disabled={true}  /> 
+        
+        </Col>
+        
+
+       </Row>
 
 
         </Card>
