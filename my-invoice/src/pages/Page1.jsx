@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {Form, Card ,Row ,Col }from 'react-bootstrap';
+import Invoiceitems from './items/Invoiceitems';
 
 function Page1() {
   const [state ,setState] = useState({
@@ -10,9 +11,9 @@ function Page1() {
     billTo:'',
     billToAddress:'',
     billToEmail:'',
-    billFrom:'MUZAMIL STORE',
+    billFrom:'MUZAMIL LIFESTYLE',
     billFromEmail:'muzamilohuthu@gmail.com',
-    billFromAddress:'Coimbatore,Tamilnadu,India',
+    billFromAddress:'Coimbatore,Tamilnadu,India.',
     notes:'',
     subTotal:'0.00',
     taxRate: 0.00,
@@ -124,7 +125,7 @@ const onchangename  = (event) => {
         
 
        </Row>
-
+      < Invoiceitems items={[items]} />
 
         </Card>
 
