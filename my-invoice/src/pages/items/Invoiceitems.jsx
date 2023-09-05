@@ -21,7 +21,7 @@ function Invoiceitems(props) {
         {itemTable}
       </tbody>
       </Table>
-      <Button className='fs-5'>
+      <Button className='fs-5' onClick={props.onRowAdd}>
         ADD ITEMS
       </Button>
     </div>
@@ -97,3 +97,7 @@ function ItemRow(props) {
 
 
 export default Invoiceitems
+
+
+
+

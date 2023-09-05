@@ -20,13 +20,15 @@ function Page1() {
     taxAmount:'0.00',
     discountRate:0.00,
     discountAmount:'0.00'
-  })
+  });
 
-  const[total ,setTotal]= useState(0.00)
+  // const[total ,setTotal]= useState(0.00) 
 
-  const[items,setItems]=useState(
+
+
+  const [items, setItems] = useState(
+ 
     {
-    id:0,
     name:'',
     description:'',
     price:1.0,
@@ -58,25 +60,25 @@ const onItemizedItemEdit =(event)=>{
      })
      setItems(newItems);
 }
-const handleAddEvent =(e)=>{
-    var id = (+new Date() +Math.floor(Math.random() * 9999999)).tostring(36);
-    var item={
-      id:id,
-      name:'',
-      price:1.0,
-      description:'',
-      quantity:1,
-    }
-    setItems((items)=> [...items,item]);
+const handleAddEvent = () => {
+  console.log("Add Item clicked");
+  const id = (+new Date() + Math.floor(Math.random() * 9999999)).toString(36);
+  const newItem = {
+    id,
+    name: '',
+    price: 1.0,
+    description: '',
+    quantity: 1,
+  };
+  setItems((prevItems) => [...prevItems, newItem]);
 };
 
-const handleRowDel =(item) =>{
-  var index =item.indexOf(item);
-  setItems((items) => [
-    ...items.splice(index,1),
-    ...items.splice(index+1),
-  ]);
-;}
+
+const handleRowDel = (itemToDelete) => {
+  console.log("Delete Item clicked");
+  const updatedItems = items.filter((item) => item.id !== itemToDelete.id);
+  setItems(updatedItems);
+};
 
   return (
     <div>
@@ -141,7 +143,7 @@ const handleRowDel =(item) =>{
         {/* <Form.Label> Address: </Form.Label> */}
         <Form.Control
          placeholder='customer Address' 
-         value={state.billTAddress}
+         value={state.billAddress}
          type='text'
          name='billToAddress'
          className='my-2' 
@@ -162,12 +164,15 @@ const handleRowDel =(item) =>{
         
 
        </Row>
-      < Invoiceitems items={[items]} onItemizedItemEdit={onItemizedItemEdit} onRowAdd={handleAddEvent} onRowDel={handleRowDel} currency={state.currency} />
+      < Invoiceitems
+       items={items}
+        onItemizedItemEdit={onItemizedItemEdit} 
+        onRowAdd={handleAddEvent} 
+        onRowDel={handleRowDel} 
+        currency={state.currency}
+         />
 
         </Card>
-
-
-
         </Col>
       </Row>
       </Form>
@@ -177,3 +182,5 @@ const handleRowDel =(item) =>{
 }
 
 export default Page1
+
+
