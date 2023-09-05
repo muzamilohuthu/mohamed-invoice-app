@@ -41,6 +41,43 @@ const onchangename  = (event) => {
      }))
 }
 
+const onItemizedItemEdit =(event)=>{
+     const individualItem ={
+      id:event.target.id,
+      name:event.target.name,
+      value:event.target.value
+     }
+     var newItems = items.map((item) =>{
+      for(var key in item){
+        if(key === individualItem.name && item.Id === individualItem.id){
+          item[key] = individualItem.value
+        
+        }
+      }
+      return item
+     })
+     setItems(newItems);
+}
+const handleAddEvent =(e)=>{
+    var id = (+new Date() +Math.floor(Math.random() * 9999999)).tostring(36);
+    var item={
+      id:id,
+      name:'',
+      price:1.0,
+      description:'',
+      quantity:1,
+    }
+    setItems((items)=> [...items,item]);
+};
+
+const handleRowDel =(item) =>{
+  var index =item.indexOf(item);
+  setItems((items) => [
+    ...items.splice(index,1),
+    ...items.splice(index+1),
+  ]);
+;}
+
   return (
     <div>
       <h2>Invoice Generator</h2>
@@ -125,7 +162,7 @@ const onchangename  = (event) => {
         
 
        </Row>
-      < Invoiceitems items={[items]} />
+      < Invoiceitems items={[items]} onItemizedItemEdit={onItemizedItemEdit} onRowAdd={handleAddEvent} onRowDel={handleRowDel} currency={state.currency} />
 
         </Card>
 
